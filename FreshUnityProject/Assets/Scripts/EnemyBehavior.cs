@@ -1,9 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyBehavior : MonoBehaviour
 {
+    public Transform patrolRoute;
+    public List<Transform> locations;
+    private int locationIndex = 0;
+
+    private NavMeshAgent agent;
+
+    private void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+
+        InitializePatrolRoute();
+
+
+    }
+    void InitializePatrolRoute()
+    {
+        foreach(Transform child in patrolRoute)
+        {
+            locations.Add(child);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.name == "Player")
