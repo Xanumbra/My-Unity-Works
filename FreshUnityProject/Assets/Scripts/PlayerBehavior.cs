@@ -7,16 +7,15 @@ public class PlayerBehavior : MonoBehaviour
     public float moveSpeed = 10f;
     public float rotateSpeed = 75f;
     public float jumpVelocity = 5f;
-
     public float distanceToGround = 0.1f;
-
     public LayerMask groundLayer;
+
+    public GameObject bullet;
+    public float bulletSpeed = 100f;
 
     private float vInput;
     private float hInput;
-
     private Rigidbody _rb;
-
     private CapsuleCollider _col;
 
     private void Start()
@@ -67,5 +66,12 @@ public class PlayerBehavior : MonoBehaviour
         _rb.MovePosition(this.transform.position + this.transform.forward * vInput * Time.fixedDeltaTime);
 
         _rb.MoveRotation(_rb.rotation * angleRot);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            GameObject newBullet = Instantiate(bullet, this.transform.position, this.transform.rotation) as GameObject;
+            Rigidbody bulletRB = newBullet.GetComponent<Rigidbody>();
+            bulletRB.velocity = this.transform.forward * bulletSpeed;
+        }
     }
 }
