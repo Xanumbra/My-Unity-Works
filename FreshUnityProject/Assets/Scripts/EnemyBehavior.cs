@@ -14,6 +14,22 @@ public class EnemyBehavior : MonoBehaviour
 
     private int locationIndex = 0;
 
+    private int _lives = 3;
+    public int EnemyLives
+    {
+        get { return _lives; }
+        private set
+        {
+            _lives = value;
+
+            if(_lives <= 0)
+            {
+                Destroy(this.gameObject);
+                Debug.Log("Enemy down.");
+            }
+        }
+    }
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -60,6 +76,14 @@ public class EnemyBehavior : MonoBehaviour
         if(agent.remainingDistance < 0.2f && !agent.pathPending)
         {
             MoveToNextPatrolRoute();
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.name == "Bullet (Clone)")
+        {
+            EnemyLives -= 1;
+            Debug.Log("Critical hit!");
         }
     }
 }
