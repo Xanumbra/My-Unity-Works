@@ -9,6 +9,7 @@ public class GameBehavior : MonoBehaviour
 
     public bool showWinScreen = false;
 
+    public bool showLossScreen = false;
     private int _itemsCollected = 0;
     public int Items
     {
@@ -40,7 +41,20 @@ public class GameBehavior : MonoBehaviour
         set {
             _playerLives = value;
             Debug.LogFormat("Lives: {0}", _playerLives);
+            if(_playerLives <= 0)
+            {
+                labelText = "You want another life with that?";
+                showLossScreen = true;
+                Time.timeScale = 0;
             }
+            else
+            {
+                labelText = "Ouch... that's got hurt.";
+            }
+
+            }
+        
+
     }
     private void OnGUI()
     {
@@ -51,6 +65,14 @@ public class GameBehavior : MonoBehaviour
         if (showWinScreen)
         {
             if(GUI.Button(new Rect(Screen.width/2 - 100,Screen.height/2 - 50,200,100),"YOU WON!"))
+            {
+                SceneManager.LoadScene(0);
+                Time.timeScale = 1.0f;
+            }
+        }
+        if (showLossScreen)
+        {
+            if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 100), "You lose..."))
             {
                 SceneManager.LoadScene(0);
                 Time.timeScale = 1.0f;
