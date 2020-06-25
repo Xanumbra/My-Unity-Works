@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+using CustomExtensions;
+
 public class GameBehavior : MonoBehaviour, IManager
 {
     public string labelText = "Collect all 4 items and win your freedom!";
@@ -26,7 +29,9 @@ public class GameBehavior : MonoBehaviour, IManager
     {
         _state = "Manager initialized...";
         Debug.Log(_state);
+        _state.FancyDebug();
 
+        Debug.Log(_state);
     }
 
     public int Items
