@@ -34,7 +34,7 @@ public class GameBehavior : MonoBehaviour
 
     private int _playerLives = 3;
 
-    public int HP
+    public int Lives
     {
         get { return _playerLives; }
         set {
