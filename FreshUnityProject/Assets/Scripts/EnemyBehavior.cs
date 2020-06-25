@@ -29,7 +29,11 @@ public class EnemyBehavior : MonoBehaviour
     }
     void MoveToNextPatrolRoute()
     {
+        if (locations.Count == 0)
+            return;
         agent.destination = locations[locationIndex].position;
+
+        locationIndex = (locationIndex + 1) % locations.Count;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -44,6 +48,13 @@ public class EnemyBehavior : MonoBehaviour
         if(other.name == "Player")
         {
             Debug.Log("Player out of range, resume patrol");
+        }
+    }
+    private void Update()
+    {
+        if(agent.remainingDistance < 0.2f && !agent.pathPending)
+        {
+            MoveToNextPatrolRoute();
         }
     }
 }
