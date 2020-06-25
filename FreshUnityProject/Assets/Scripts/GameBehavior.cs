@@ -20,10 +20,7 @@ public class GameBehavior : MonoBehaviour
 
             if (_itemsCollected >= maxItems)
             {
-                labelText = "You've found all the items!";
-                showWinScreen = true;
-
-                Time.timeScale = 0f;
+                ChangeWinOrLoseMessage("You've found all the items!", true);
             }
             else
             {
@@ -43,9 +40,7 @@ public class GameBehavior : MonoBehaviour
             Debug.LogFormat("Lives: {0}", _playerLives);
             if(_playerLives <= 0)
             {
-                labelText = "You want another life with that?";
-                showLossScreen = true;
-                Time.timeScale = 0;
+                ChangeWinOrLoseMessage("You want another life with that?", false);
             }
             else
             {
@@ -55,6 +50,19 @@ public class GameBehavior : MonoBehaviour
             }
         
 
+    }
+    void ChangeWinOrLoseMessage(string labelText,bool isWin)
+    {
+        this.labelText = labelText;
+        if (isWin)
+        {
+            showWinScreen = true;
+        }
+        else
+        {
+            showLossScreen = true;
+        }
+        Time.timeScale = 0f;
     }
     void RestartLevel()
     {
