@@ -18,6 +18,7 @@ public class EnemyBehavior : MonoBehaviour
         InitializePatrolRoute();
 
 
+        MoveToNextPatrolRoute();
     }
     void InitializePatrolRoute()
     {
@@ -25,6 +26,10 @@ public class EnemyBehavior : MonoBehaviour
         {
             locations.Add(child);
         }
+    }
+    void MoveToNextPatrolRoute()
+    {
+        agent.destination = locations[locationIndex].position;
     }
 
     private void OnTriggerEnter(Collider other)
