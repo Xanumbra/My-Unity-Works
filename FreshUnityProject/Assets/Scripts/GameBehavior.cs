@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameBehavior : MonoBehaviour
 {
     public string labelText = "Collect all 4 items and win your freedom!";
-    public int maxItems = 4;
+    public const int maxItems = 4;
 
     public bool showWinScreen = false;
 
