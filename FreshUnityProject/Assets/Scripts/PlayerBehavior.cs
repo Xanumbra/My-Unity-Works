@@ -7,6 +7,8 @@ public class PlayerBehavior : MonoBehaviour
     public float moveSpeed = 10f;
     public float rotateSpeed = 75f;
 
+    public float jumpVelocity = 5f;
+
     private float vInput;
     private float hInput;
 
@@ -24,9 +26,14 @@ public class PlayerBehavior : MonoBehaviour
 
         hInput = Input.GetAxis("Horizontal") * rotateSpeed;
 
-        this.transform.Translate(Vector3.forward * vInput * Time.deltaTime);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _rb.AddForce(Vector3.up * jumpVelocity,ForceMode.Impulse);
+        }
 
-        this.transform.Rotate(Vector3.up * hInput * Time.deltaTime);
+        //this.transform.Translate(Vector3.forward * vInput * Time.deltaTime);
+
+        //this.transform.Rotate(Vector3.up * hInput * Time.deltaTime);
 
     }
     private void FixedUpdate()
