@@ -56,6 +56,11 @@ public class GameBehavior : MonoBehaviour
         
 
     }
+    void RestartLevel()
+    {
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1.0f;
+    }
     private void OnGUI()
     {
         GUI.Box(new Rect(20,20,150,25),"Player Health:"+_playerLives);
@@ -66,16 +71,14 @@ public class GameBehavior : MonoBehaviour
         {
             if(GUI.Button(new Rect(Screen.width/2 - 100,Screen.height/2 - 50,200,100),"YOU WON!"))
             {
-                SceneManager.LoadScene(0);
-                Time.timeScale = 1.0f;
+                RestartLevel();
             }
         }
         if (showLossScreen)
         {
             if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 100), "You lose..."))
             {
-                SceneManager.LoadScene(0);
-                Time.timeScale = 1.0f;
+                RestartLevel();
             }
         }
     }
