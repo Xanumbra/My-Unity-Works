@@ -17,12 +17,15 @@ public class PlayerBehavior : MonoBehaviour
     private float hInput;
     private Rigidbody _rb;
     private CapsuleCollider _col;
+    private GameBehavior _gameManager;
 
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
 
         _col = GetComponent<CapsuleCollider>();
+
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameBehavior>();
     }
     private bool IsGrounded()
     {
@@ -72,6 +75,13 @@ public class PlayerBehavior : MonoBehaviour
             GameObject newBullet = Instantiate(bullet, this.transform.position, this.transform.rotation) as GameObject;
             Rigidbody bulletRB = newBullet.GetComponent<Rigidbody>();
             bulletRB.velocity = this.transform.forward * bulletSpeed;
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.name == "Enemy")
+        {
+            _gameManager.Lives -= 1;
         }
     }
 }
