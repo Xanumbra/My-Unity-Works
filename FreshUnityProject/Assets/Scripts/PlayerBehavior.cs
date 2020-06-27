@@ -59,6 +59,13 @@ public class PlayerBehavior : MonoBehaviour
 
         //this.transform.Rotate(Vector3.up * hInput * Time.deltaTime);
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            GameObject newBullet = Instantiate(bullet, this.transform.position, this.transform.rotation) as GameObject;
+            Rigidbody bulletRB = newBullet.GetComponent<Rigidbody>();
+            bulletRB.velocity = this.transform.forward * bulletSpeed;
+        }
+
     }
     private void FixedUpdate()
     {
@@ -70,12 +77,6 @@ public class PlayerBehavior : MonoBehaviour
 
         _rb.MoveRotation(_rb.rotation * angleRot);
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            GameObject newBullet = Instantiate(bullet, this.transform.position, this.transform.rotation) as GameObject;
-            Rigidbody bulletRB = newBullet.GetComponent<Rigidbody>();
-            bulletRB.velocity = this.transform.forward * bulletSpeed;
-        }
     }
     private void OnCollisionEnter(Collision collision)
     {
