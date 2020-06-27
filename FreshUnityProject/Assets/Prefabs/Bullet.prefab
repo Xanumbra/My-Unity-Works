@@ -123,3 +123,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01c109903b9dc4c43a2915c137a02d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onscreenDelay: 3
